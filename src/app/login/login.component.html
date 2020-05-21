@@ -1,0 +1,60 @@
+<form novalidate [formGroup]="loginForm">
+  <div class="main-container">
+    <div id="login-container" class="mat-elevation-z8">
+      <h2 class="primary">Login</h2>
+
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="Email address"
+          formControlName="email"
+          required
+        />
+        <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+          Please enter email id
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          [type]="hide ? 'password' : 'text'"
+          formControlName="password"
+          required
+        />
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+          Please enter password
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle color="primary">
+        <span class="toggle-btn">Remember me</span>
+      </mat-slide-toggle>
+      <br />
+
+      <div>
+        <button mat-raised-button type="button" class="Sign-Up-btn">
+          Sign Up
+        </button>
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          class="Login-btn"
+          (click)="onLogin()"
+        >
+          Login
+        </button>
+      </div>
+
+      <div class="footer-sec">
+        <br />
+        <br />
+        <hr />
+        <a class="primary">Forgot Password?</a>
+        <br />
+      </div>
+    </div>
+  </div>
+</form>
