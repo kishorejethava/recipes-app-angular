@@ -1,0 +1,17 @@
+<div class="container">
+  <mat-grid-list cols="4" rowHeight="2:1" gutterSize="10px">
+    <mat-grid-tile
+      *ngFor="let feed of feeds"
+      class="mat-elevation-z8"
+      style="background-color: wheat;"
+    >
+      <a>
+        <div>
+          <mat-card class="example-card">
+            <img mat-card-image src="{{ feed.photo }}" />
+          </mat-card>
+        </div>
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -8,6 +8,7 @@
           matInput
           placeholder="Email address"
           formControlName="email"
+          value="jm1@example.com"
           required
         />
         <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
@@ -21,6 +22,7 @@
           placeholder="Password"
           [type]="hide ? 'password' : 'text'"
           formControlName="password"
+          value="jay@123"
           required
         />
         <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
