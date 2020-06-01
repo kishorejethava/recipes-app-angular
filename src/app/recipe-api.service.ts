@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
-import { ReqLogin } from './login/ReqLogin';
-import { ResLogin } from './login/res-login';
+import { ReqLogin } from './login/req.login';
+import { ResLogin } from './login/res.login';
 import { Feed } from './feed/Feed';
+import { Recipe } from './recipe-detail/Recipe';
+import { ResAddRecipe } from './add-recipe/res.add-recipe';
+import { ReqAddRecipe } from './add-recipe/req.add-recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +43,36 @@ export class RecipeApiService {
         
       }),
       catchError(this.handleError<Feed[]>("addHero"))
+    );
+
+  }
+
+  addRecipe(reqAddRecipe: ReqAddRecipe): Observable<ResAddRecipe> {
+    var httpOptions1 = {
+      headers: new HttpHeaders({ "Content-Type": "application/json", 
+      "Authorization" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.MGBf-reNrHdQuwQzRDDNPMo5oWv4GlZKlDShFAAe16s"}),
+    };
+    return this.http.post(this.baseUrl + "recipe/add", reqAddRecipe, httpOptions1).pipe(
+      tap((resAddRecipe: ResAddRecipe) => {
+        console.log(`res add recipe:${resAddRecipe}`)
+        
+      }),
+      catchError(this.handleError<ResAddRecipe>("addHero"))
+    );
+  }
+
+  recipeDetail(id : number) : Observable<Recipe>{
+    
+    var httpOptions1 = {
+      headers: new HttpHeaders({ "Content-Type": "application/json", 
+      "Authorization" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.MGBf-reNrHdQuwQzRDDNPMo5oWv4GlZKlDShFAAe16s"}),
+    };
+    return this.http.get(this.baseUrl + `recipe/${id}/details`, httpOptions1).pipe(
+      tap((recipe: Recipe) => {
+        console.log(`res recipe detail:${recipe}`)
+        
+      }),
+      catchError(this.handleError<Recipe>("recipe detail"))
     );
 
   }

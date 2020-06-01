@@ -8,19 +8,28 @@ import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeedComponent } from './feed/feed.component';
 import { HttpClientModule } from "@angular/common/http";
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { MatGridListResponsiveModule } from './utils/mat-grid-list-responsive/mat-grid-list-responsive.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FeedComponent
+    FeedComponent,
+    RecipeDetailComponent,
+    AddRecipeComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ImageCropperModule,
+    MatGridListResponsiveModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,92 @@
+<div class="container">
+  <img
+    width="100%"
+    height="500"
+    style="
+      background-image: url('/../assets/recipe/recipe_place_holder.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    "
+  />
+  <h2 class="recipe-name">{{ recipe.name }}</h2>
+  <div class="recipe-details">
+    <div class="innside">
+      <div class="recipe-details-item">
+        <span class="icon"
+          ><img src="/../assets/recipe/serving-portion.svg"
+        /></span>
+
+        <span class="point">{{ recipe.serves }}</span>
+        <!-- <span class="title">Easy <br class="dis_hide" />Steps</span> -->
+      </div>
+      <div class="recipe-details-item">
+        <span class="icon"
+          ><img src="/../assets/recipe/everyday-ingredients.svg"
+        /></span>
+
+        <span class="point">{{ recipe.complexity }}</span>
+        <!-- <span class="title">Everyday <br class="dis_hide" />Ingredients</span> -->
+      </div>
+      <div class="recipe-details-item">
+        <span class="icon"><img src="/../assets/recipe/mins-only.svg" /></span>
+
+        <span class="point">{{ recipe.preparationTime }}</span>
+        <!-- <span class="title"
+          >Minutes<br class="dis_hide" />
+          Only</span> -->
+      </div>
+    </div>
+  </div>
+
+  <h2>{{ recipe.firstName + " " + recipe.lastName }}</h2>
+
+  <div *ngIf="recipe.metaTags">
+    <mat-chip-list>
+      <mat-chip *ngFor="let metaTag of recipe.metaTags" [removable]="removable">
+        {{ metaTag.tag }}
+
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+
+    <!-- <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+        *ngFor="let metaTag of recipe.metaTags"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(fruit)"
+      >
+        {{ metaTag.tag }}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list> -->
+  </div>
+
+  <div>
+    <h4>Ingredients</h4>
+    <button
+      mat-mini-fab
+      color="accent"
+      id="add-button"
+      matTooltip="Add Recipe"
+      routerLink="/add"
+    >
+      <i class="material-icons">add</i>
+    </button>
+  </div>
+
+  <ul>
+    <li *ngFor="let ingredient of recipe.ingredients">
+      {{ ingredient.ingredient }}
+    </li>
+    <h6 *ngIf="recipe.ingredients">Ingredients not available</h6>
+  </ul>
+
+  <h4>Instructions</h4>
+  <ul>
+    <li *ngFor="let instruction of recipe.instructions">
+      {{ instruction.instruction }}
+    </li>
+  </ul>
+</div>

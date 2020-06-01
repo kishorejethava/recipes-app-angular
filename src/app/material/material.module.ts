@@ -5,11 +5,15 @@ import {
   MatInputModule,
   MatIconModule,
   MatSlideToggleModule,
-  MatGridListModule
+  MatGridListModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatButtonModule,
+  MatSelectModule
 } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-const MaterialComponents = [
+const modules = [
   MatFormFieldModule,
   MatInputModule,
   FormsModule,
@@ -17,11 +21,15 @@ const MaterialComponents = [
   MatIconModule,
   MatCardModule,
   MatSlideToggleModule,
-  MatGridListModule
+  MatGridListModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatButtonModule,
+  MatSelectModule
 ];
 
 @NgModule({
-  imports: [MaterialComponents],
-  exports: [MaterialComponents],
+  imports: [modules],
+  exports: [modules],
 })
 export class MaterialModule {}

@@ -1,0 +1,95 @@
+<form novalidate [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+<div class="main-container">
+  <div id="container" class="mat-elevation-z1">
+    <h3 class="primary">Add Recipe</h3>
+    <mat-form-field id="form" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name"/>
+      <mat-error *ngIf="!formGroup.controls['name'].valid && formGroup.controls['name'].touched">
+        {{ titleAlert }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field id="form" appearance="fill">
+      <mat-label>Serves</mat-label>
+      <input matInput formControlName="serves"/>
+      <mat-error *ngIf="!formGroup.controls['serves'].valid && formGroup.controls['serves'].touched">
+        {{ titleAlert }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field id="form" appearance="fill">
+      <mat-label>You Tube Link</mat-label>
+      <input matInput />
+    </mat-form-field>
+
+    <mat-form-field id="form" appearance="fill">
+      <mat-label>Preparation Time</mat-label>
+      <input matInput formControlName="preparationTime"/>
+      <mat-error *ngIf="!formGroup.controls['preparationTime'].valid && formGroup.controls['preparationTime'].touched">
+        {{ titleAlert }}
+      </mat-error>
+
+      
+    </mat-form-field>
+
+      <mat-form-field id="form" appearance="fill">
+        <mat-label>Complexity</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="complexity" formControlName="complexity">
+          <mat-option
+            *ngFor="let complexity of complexities"
+            [value]="complexity.value"
+          >
+            {{ complexity.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!formGroup.controls['complexity'].valid && formGroup.controls['complexity'].touched">
+            {{ titleAlert }}
+          </mat-error>
+      </mat-form-field>
+      <!-- <p>Selected complexity: {{ selectedValue }}</p> -->
+
+    <mat-form-field id="form" class="example-chip-list">
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip
+          *ngFor="let category of categories"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(category)"
+        >
+          {{ category.name }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Category..."
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+
+    <div id="form">
+      <input type="file" (change)="fileChangeEvent($event)" />
+
+      <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="4 / 3"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+
+      <img [src]="croppedImage" />
+
+      <button mat-raised-button type="submit" color="primary" [disabled]="!formGroup.valid">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+</form>

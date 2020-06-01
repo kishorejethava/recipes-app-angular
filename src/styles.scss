@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+$primary : rgb(196,47,47);
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+  height: 100%;
+}
+
+.basic-container {
+  padding: 5px;
+  height: 100%;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+}
+
+.main-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.container {
+  width: 75%;
+  margin: 8px auto;
+}
+
+header {
+  background: $primary;
+  padding: 1em;
+
+  a {
+    text-decoration: none;
+  }
+
+  a.logo {
+    font-weight: bold;
+    color: white;
+    font-size: large;
+  }
+  nav {
+    float: right;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      display: flex;
+
+      li a {
+        color: wheat;
+        padding: 1em;
+        &:hover {
+          background: darken($primary, 10%);
+        }
+      }
+    }
+  }
+}
