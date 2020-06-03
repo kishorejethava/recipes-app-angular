@@ -16,7 +16,7 @@ export class Ingredient {
   id: number;
   ingredient: string;
 }
-class Instruction {
+export class Instruction {
   id: number;
   instruction: string;
 }

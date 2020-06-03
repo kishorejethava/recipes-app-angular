@@ -9,7 +9,8 @@ import {
   MatChipsModule,
   MatDialogModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule
 } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -25,7 +26,8 @@ const modules = [
   MatChipsModule,
   MatDialogModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule
 ];
 
 @NgModule({

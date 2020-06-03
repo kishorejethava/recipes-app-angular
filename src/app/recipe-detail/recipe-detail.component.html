@@ -1,14 +1,26 @@
-<div class="container">
-  <img
-    width="100%"
-    height="500"
-    style="
-      background-image: url('/../assets/recipe/recipe_place_holder.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-    "
-  />
+<div class="container" *ngIf="recipe">
+  <div class="image-favorite-wrapper">
+    <span
+      ><button
+        mat-icon-button
+        color="primary"
+        style="background-color: white;"
+        class="mat-elevation-z2"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </span>
+    <img
+      width="100%"
+      height="500"
+      style="
+        background-image: url('/../assets/recipe/recipe_place_holder.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+      "
+    />
+  </div>
   <h2 class="recipe-name">{{ recipe.name }}</h2>
   <div class="recipe-details">
     <div class="innside">
@@ -41,7 +53,7 @@
 
   <h2>{{ recipe.firstName + " " + recipe.lastName }}</h2>
 
-  <div *ngIf="recipe.metaTags">
+  <div *ngIf="recipe">
     <mat-chip-list>
       <mat-chip *ngFor="let metaTag of recipe.metaTags" [removable]="removable">
         {{ metaTag.tag }}
@@ -49,44 +61,102 @@
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
+    <div class="row-content">
+      <div id="ingredient-wrapper" class="mat-elevation-z8">
+        <div class="ingredient-header-wrapper">
+          <h2 style="margin-left: 19px;">Ingredients</h2>
+          <button
+            mat-mini-fab
+            color="white"
+            class="add-ingredient-button"
+            matTooltip="Add Recipe"
+            (click)="openDialogIngredient()"
+          >
+            <i class="material-icons">add</i>
+          </button>
+        </div>
+        <mat-table [dataSource]="dataSourceIngredient">
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+          </ng-container>
 
-    <!-- <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip
-        *ngFor="let metaTag of recipe.metaTags"
-        [selectable]="selectable"
-        [removable]="removable"
-        (removed)="remove(fruit)"
-      >
-        {{ metaTag.tag }}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-list> -->
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{
+              element.ingredient
+            }}</mat-cell>
+          </ng-container>
+
+          <!-- Delete Column -->
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                title="Delete Ingredient"
+                (click)="deleteIngredient(element.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+      <div id="instruction-wrapper" class="mat-elevation-z8">
+        <div class="ingredient-header-wrapper">
+          <h2 style="margin-left: 19px;">Instructions</h2>
+          <button
+            mat-mini-fab
+            color="white"
+            class="add-ingredient-button"
+            matTooltip="Add Recipe"
+            (click)="openDialogInstruction()"
+          >
+            <i class="material-icons">add</i>
+          </button>
+        </div>
+
+        <mat-table [dataSource]="dataSourceInstruction">
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.instruction }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Delete Column -->
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                title="Delete Instruction"
+                (click)="deleteInstruction(element.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <h4>Ingredients</h4>
-    <button
-      mat-mini-fab
-      color="accent"
-      id="add-button"
-      matTooltip="Add Recipe"
-      routerLink="/add"
-    >
-      <i class="material-icons">add</i>
-    </button>
-  </div>
-
-  <ul>
-    <li *ngFor="let ingredient of recipe.ingredients">
-      {{ ingredient.ingredient }}
-    </li>
-    <h6 *ngIf="recipe.ingredients">Ingredients not available</h6>
-  </ul>
-
-  <h4>Instructions</h4>
-  <ul>
-    <li *ngFor="let instruction of recipe.instructions">
-      {{ instruction.instruction }}
-    </li>
-  </ul>
 </div>
