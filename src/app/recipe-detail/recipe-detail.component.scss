@@ -1,3 +1,16 @@
+#chef-wrapper {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 25%;
+  margin-top: -50px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+}
 .recipe-name {
   align-self: center;
   background-color: yellow;
@@ -8,21 +21,27 @@
   background: #e7e7e7;
 }
 .recipe-details {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   vertical-align: top;
   width: 100%;
   margin-bottom: 46px;
-  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
 }
-.innside {
+#innside {
   display: flex;
   flex-direction: row;
   text-align: center;
   vertical-align: top;
-  width: 100%;
+  width: 70%;
   justify-content: center;
 }
 .recipe-details-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 24%;
   border-right: solid 1px #e3e3e3;
   padding: 0 5px;
@@ -39,9 +58,8 @@
     display: inline-block;
     vertical-align: top;
     width: 100%;
-    font-size: 18px;
+    font-size: 15px;
     line-height: normal;
-    font-family: "AvenirNextLTPro-Bold";
   }
   .title {
     display: inline-block;
@@ -54,6 +72,9 @@
   .dis_hide {
     display: inline-block;
   }
+}
+.recipe-details-item:last-child {
+  border-right: none;
 }
 .image-favorite-wrapper {
   position: relative;

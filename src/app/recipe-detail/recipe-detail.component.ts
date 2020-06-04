@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { RecipeApiService } from "../recipe-api.service";
 import { Recipe, Ingredient, Instruction } from "./Recipe";
 import { ActivatedRoute } from "@angular/router";
@@ -20,6 +20,8 @@ export interface DialogData {
   styleUrls: ["./recipe-detail.component.scss"],
 })
 export class RecipeDetailComponent implements OnInit {
+  @Input() isFavorite: boolean;
+  @Output() favoriteChange = new EventEmitter<boolean>();
   dataSourceIngredient = new MatTableDataSource<Ingredient>([]);
   dataSourceInstruction = new MatTableDataSource<Instruction>([]);
   ingredient: string;
@@ -41,6 +43,8 @@ export class RecipeDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get("id");
     this.apiService.recipeDetail(id).subscribe((recipe) => {
       this.recipe = recipe;
+      this.isFavorite = recipe.inCookingList == 1;
+      this.favoriteChange.emit(this.isFavorite);
       this.dataSourceIngredient.data = recipe.ingredients;
       this.dataSourceInstruction.data = recipe.instructions;
     });
@@ -142,6 +146,18 @@ export class RecipeDetailComponent implements OnInit {
       .subscribe((resOnlyMessage) => {
         this.getInstructions();
         console.log(`Delete Instruction?:${resOnlyMessage.msg}`);
+      });
+  }
+
+  toggleFavorite() {
+    console.log("toggleFavorite");
+    const id = +this.route.snapshot.paramMap.get("id");
+    this.isFavorite = !this.isFavorite;
+    this.favoriteChange.emit(this.isFavorite);
+    this.apiService
+      .inCookingList(id, this.isFavorite)
+      .subscribe((resOnlyMessage) => {
+        console.log(`inCookingList?:${resOnlyMessage.msg}`);
       });
   }
 }

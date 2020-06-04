@@ -3,11 +3,12 @@
     <span
       ><button
         mat-icon-button
-        color="primary"
-        style="background-color: white;"
+        style="background-color: white; color: tomato;"
         class="mat-elevation-z2"
+        (click)="toggleFavorite()"
       >
-        <mat-icon>favorite</mat-icon>
+        <mat-icon *ngIf="isFavorite">favorite</mat-icon>
+        <mat-icon *ngIf="!isFavorite">favorite_border</mat-icon>
       </button>
     </span>
     <img
@@ -22,36 +23,35 @@
     />
   </div>
   <h2 class="recipe-name">{{ recipe.name }}</h2>
+
   <div class="recipe-details">
-    <div class="innside">
+    <div mat-card id="chef-wrapper" class="mat-elevation-z2">
+      <h2>{{ recipe.firstName + " " + recipe.lastName }}</h2>
+    </div>
+    <div mat-card id="innside" class="mat-elevation-z1">
       <div class="recipe-details-item">
         <span class="icon"
           ><img src="/../assets/recipe/serving-portion.svg"
         /></span>
 
-        <span class="point">{{ recipe.serves }}</span>
-        <!-- <span class="title">Easy <br class="dis_hide" />Steps</span> -->
+        <span class="point">{{ recipe.serves }} Serving Portions</span>
       </div>
+
       <div class="recipe-details-item">
         <span class="icon"
           ><img src="/../assets/recipe/everyday-ingredients.svg"
         /></span>
 
         <span class="point">{{ recipe.complexity }}</span>
-        <!-- <span class="title">Everyday <br class="dis_hide" />Ingredients</span> -->
       </div>
+
       <div class="recipe-details-item">
         <span class="icon"><img src="/../assets/recipe/mins-only.svg" /></span>
 
         <span class="point">{{ recipe.preparationTime }}</span>
-        <!-- <span class="title"
-          >Minutes<br class="dis_hide" />
-          Only</span> -->
       </div>
     </div>
   </div>
-
-  <h2>{{ recipe.firstName + " " + recipe.lastName }}</h2>
 
   <div *ngIf="recipe">
     <mat-chip-list>
@@ -92,8 +92,7 @@
 
           <!-- Delete Column -->
           <ng-container matColumnDef="delete">
-            <mat-header-cell *matHeaderCellDef>
-            </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <button
                 mat-icon-button
@@ -140,8 +139,7 @@
 
           <!-- Delete Column -->
           <ng-container matColumnDef="delete">
-            <mat-header-cell *matHeaderCellDef>
-            </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <button
                 mat-icon-button

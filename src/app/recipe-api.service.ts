@@ -12,7 +12,9 @@ import { ReqAddIngredient } from "./recipe-detail/req.add-ingredient";
 import { ResOnlyMessage } from "./utils/res-only-message";
 import { ReqAddInstruction } from "./recipe-detail/req.add-instruction";
 import { ReqDeleteIngredient } from "./recipe-detail/req.delete-ingredient";
-import { ReqDeleteInstruction } from './recipe-detail/req.delete-instruction';
+import { ReqDeleteInstruction } from "./recipe-detail/req.delete-instruction";
+import { ReqRecipe } from "./recipe-detail/req-recipe";
+import { ResMessage } from "./utils/res-message";
 
 @Injectable({
   providedIn: "root",
@@ -226,6 +228,28 @@ export class RecipeApiService {
         }),
         catchError(this.handleError<ResOnlyMessage>("rmInstruction"))
       );
+  }
+  /* API request to add in cooking list */
+  inCookingList(recipeId: number, isFavorite: boolean): Observable<ResMessage> {
+    const recipe: ReqRecipe = {
+      recipeId: recipeId,
+    };
+    var httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.MGBf-reNrHdQuwQzRDDNPMo5oWv4GlZKlDShFAAe16s",
+      }),
+    };
+    const url = isFavorite
+      ? "recipe/add-to-cooking-list"
+      : "recipe/rm-from-cooking-list";
+    return this.http.post(this.baseUrl + url, recipe, httpOptions).pipe(
+      tap((resOnlyMessage: ResMessage) => {
+        console.log(`res inCookingList:${resOnlyMessage}`);
+      }),
+      catchError(this.handleError<ResMessage>("inCookingList"))
+    );
   }
 
   /**
