@@ -50,9 +50,26 @@ export class RecipeApiService {
     };
     return this.http.get(this.baseUrl + "recipe/feeds", httpOptions1).pipe(
       tap((feeds: Feed[]) => {
-        console.log(`res feeds:${feeds}`);
+        console.table(`res feeds:${JSON.stringify(feeds)}`);
       }),
       catchError(this.handleError<Feed[]>("addHero"))
+    );
+  }
+
+  /* API request for fetching feeds */
+  cookingList(): Observable<any> {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.MGBf-reNrHdQuwQzRDDNPMo5oWv4GlZKlDShFAAe16s",
+      }),
+    };
+    return this.http.get(this.baseUrl + "recipe/cooking-list", httpOptions).pipe(
+      tap((feeds: Feed[]) => {
+        console.log(`res cooking-list:${feeds}`);
+      }),
+      catchError(this.handleError<Feed[]>("cookingList"))
     );
   }
 

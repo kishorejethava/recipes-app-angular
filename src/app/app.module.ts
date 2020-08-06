@@ -14,6 +14,7 @@ import { ImageCropperModule } from "ngx-image-cropper";
 import { MatGridListResponsiveModule } from "./utils/mat-grid-list-responsive/mat-grid-list-responsive.module";
 import { AddIngredientDialogComponent } from "./add-ingredient-dialog/add-ingredient-dialog.component";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material';
     RecipeDetailComponent,
     AddRecipeComponent,
     AddIngredientDialogComponent,
+    FavoriteComponent,
   ],
   imports: [
     BrowserModule,

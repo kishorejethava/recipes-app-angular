@@ -1,0 +1,35 @@
+.example-card {
+    height:82%;
+    position: absolute;
+    width: 82%;
+    opacity: 1.0;
+  }
+  .recipe-image {
+    height: 100px;
+    width: 100px;
+  }
+  .example-card:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  #image {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+  }
+  .container:hover .image {
+    opacity: 0.3;
+  }
+  
+  #add-button {
+    top: auto;
+    right: 20px;
+    bottom: 20px;
+    left: auto;
+    position: fixed;
+  }
+  
+  

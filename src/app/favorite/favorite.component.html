@@ -1,0 +1,28 @@
+<div class="container">
+    <mat-grid-list
+      [responsive]="responsive"
+      (responsiveColsChange)="cols = $event"
+      gutterSize="1px"
+    >
+      <mat-grid-tile *ngFor="let feed of feeds" class="grid-item">
+        <mat-card class="example-card" routerLink="/detail/{{ feed.recipeId }}">
+          <img mat-card-image src="/../assets/recipe/recipe_place_holder.jpg" />
+  
+          <mat-card-content>
+            <h3>{{ feed.name }}</h3>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  
+    <button
+      mat-fab
+      color="accent"
+      id="add-button"
+      matTooltip="Add Recipe"
+      routerLink="/add"
+    >
+      <i class="material-icons">add</i>
+    </button>
+  </div>
+  

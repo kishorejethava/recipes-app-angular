@@ -4,6 +4,7 @@ import { LoginComponent } from "./login/login.component";
 import { FeedComponent } from "./feed/feed.component";
 import { RecipeDetailComponent } from "./recipe-detail/recipe-detail.component";
 import { AddRecipeComponent } from "./add-recipe/add-recipe.component";
+import { FavoriteComponent } from "./favorite/favorite.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: "feed", component: FeedComponent },
   { path: "detail/:id", component: RecipeDetailComponent },
   { path: "add", component: AddRecipeComponent },
+  { path: "cooking-list", component: FavoriteComponent },
 ];
 
 @NgModule({
